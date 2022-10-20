@@ -162,7 +162,7 @@ if __name__=="__main__":
     bot_config = config[args.bot]
     rpcs = config['rpcs']
     nft_address = args.nft_address
-    nft_abi = json.load(open(args.nft_abi_path))['abi'] # @@
+    nft_abi = json.load(open(args.nft_abi_path))
 
     bot_config['websocket']=args.websocket
 
