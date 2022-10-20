@@ -155,6 +155,7 @@ if __name__=="__main__":
     parser.add_argument("--bot")
     parser.add_argument("--nft_address")
     parser.add_argument("--nft_abi_path")
+    parser.add_argument("--websocket") # multiple websocket listeners per bot
     args = parser.parse_args()
 
     config = json.load(open(args.config))
@@ -162,6 +163,8 @@ if __name__=="__main__":
     rpcs = config['rpcs']
     nft_address = args.nft_address
     nft_abi = json.load(open(args.nft_abi_path))['abi'] # @@
+
+    bot_config['websocket']=args.websocket
 
     print("bot init ...")
     bot = event_bot(bot_config,rpcs,nft_address,nft_abi)
