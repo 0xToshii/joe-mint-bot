@@ -2,6 +2,9 @@
 **/.ipynb_checkpoints
 cache/*
 node_modules/*
+notebooks/*
+notes.txt
+testnet_config.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
