@@ -55,12 +55,12 @@ class event_bot:
 
         self.base_tx = {
                 'type':0x2,
-                'chainId':43113,
+                'chainId':self.rpc_connections[0].eth.chain_id,
                 'gas':self.gas_limit,
                 'maxFeePerGas':Web3.toWei(self.max_gas_in_gwei,'gwei'),
                 'maxPriorityFeePerGas': Web3.toWei(self.gas_tip_in_gwei,'gwei'),
-                'nonce':w3.eth.get_transaction_count(self.account.address),
-                'value':0 # to be updated later
+                'nonce':self.rpc_connections[0].eth.get_transaction_count(self.account.address),
+                'value':0
         }
 
         self.contract_function = self.mint_contract.functions.allowlistMint(1)

@@ -5,6 +5,7 @@ node_modules/*
 notebooks/*
 notes.txt
 testnet_config.json
+mainnet_config_test.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

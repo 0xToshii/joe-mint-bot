@@ -1,7 +1,7 @@
 const hre = require("hardhat");
 const abi = require("../artifacts/contracts/FlatLaunchpegMini.sol/FlatLaunchpegMini.json")['abi'];
 const fujiContractAddress = "0xDa294c40c0c64d9d3b4937f9C3DdbAe0A7e7C0DF";
-const avalancheContractAddress = "0x";
+const avalancheContractAddress = "0xBb8B9bDf061F43894E491aa579d6Fcdeaa735D0A";
 
 // set whitelist for NFT contract
 async function main() {
