@@ -1,4 +1,5 @@
 """ Bot which mints based on event listening on websocket
+    -each wallet/bot will be attached to 4 websockets
 """
 
 import argparse
@@ -50,8 +51,8 @@ class event_bot:
 
         # fixed for this event
         self.gas_limit = 300_000
-        self.max_gas_in_gwei = 50
-        self.gas_tip_in_gwei = 2
+        self.max_gas_in_gwei = 300
+        self.gas_tip_in_gwei = 50
 
         self.base_tx = {
                 'type':0x2,
@@ -79,9 +80,9 @@ class event_bot:
             tx_pending = self.pool.submit(w3.eth.send_raw_transaction,signed_tx.rawTransaction)
             tx_futures.append(tx_pending)
 
-        done,timed_out = concurrent.futures.wait(tx_futures,timeout=10) # pause execution
+        done,timed_out = concurrent.futures.wait(tx_futures,timeout=30) # pause execution
 
-        print("-futures:",len(tx_futures))
+        #print("-futures:",len(tx_futures))
 
         try: # minimal error handling
             tx_hash = tx_futures[0].result().hex()
@@ -117,18 +118,18 @@ async def start_and_run_listener():
                 # allow_list_price = topics[2] # free mint so irrelevant
                 # bot.base_tx['value']=allow_list_price
 
-                print("-got_message:",time.time())
+                print("-got_message:",allow_list_start_time,time.time())
                 
                 # block execution until 2s before mint
                 # simplest way to propagate + ensure no extra tx execution given nonce will be fixed
                 while allow_list_start_time-2.0>time.time():
                     time.sleep(0.01)
                 
-                print("-start_mint:",time.time())
+                #print("-start_mint:",time.time())
             
                 tx_status = bot.run_thread_pool(bot.first_signed_tx) # first tx can be cached
 
-                print("status:",tx_status)
+                print("-status:",tx_status)
 
                 # backup code to inf loop sending tx if failed previously
                 ## if this is reached it indicates bot will lose the race tho
@@ -139,7 +140,7 @@ async def start_and_run_listener():
 
                     tx_status = bot.run_thread_pool(signed_tx)
 
-                    print("status:",tx_status)
+                    print("-status:",tx_status)
 
                 bot.base_tx['nonce']+=1 # for testing, unnecessary
                 
