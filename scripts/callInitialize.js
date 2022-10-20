@@ -12,7 +12,7 @@ async function main() {
 
   let _allowlistStartTime = currentUnixTime+20;
   let _publicSaleStartTime = currentUnixTime+30*60;
-  let _allowlistPrice = 1e9;
+  let _allowlistPrice = 0;
   let _salePrice = 1e9;
   
   // console.log((await hre.ethers.getSigners()).address) // deployer address
